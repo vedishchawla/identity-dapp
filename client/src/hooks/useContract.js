@@ -6,7 +6,7 @@ import DIDRegistryABI from "../../build/contracts/DIDRegistry.json";
 import IssuerRegistryABI from "../../build/contracts/IssuerRegistry.json";
 import CredentialManagerABI from "../../build/contracts/CredentialManager.json";
 
-const GANACHE_CHAIN_ID = "0x539"; // 1337
+const GANACHE_CHAIN_ID = "0x539"; // 1337 (Ganache default)
 
 export function useContract() {
   const [provider, setProvider] = useState(null);
@@ -19,9 +19,15 @@ export function useContract() {
 
   const getContracts = useCallback(async (signerOrProvider, netId) => {
     const id = netId.toString();
-    const didAddr = DIDRegistryABI.networks[id]?.address;
-    const issuerAddr = IssuerRegistryABI.networks[id]?.address;
-    const credAddr = CredentialManagerABI.networks[id]?.address;
+    // Ganache uses network ID 5777 in Truffle artifacts but chain ID 1337 via MetaMask
+    const tryIds = [id, "5777", "1337"];
+    
+    let didAddr, issuerAddr, credAddr;
+    for (const tryId of tryIds) {
+      didAddr = didAddr || DIDRegistryABI.networks[tryId]?.address;
+      issuerAddr = issuerAddr || IssuerRegistryABI.networks[tryId]?.address;
+      credAddr = credAddr || CredentialManagerABI.networks[tryId]?.address;
+    }
 
     if (!didAddr || !issuerAddr || !credAddr) {
       throw new Error("Contracts not deployed on this network. Run: npx truffle migrate");
@@ -45,24 +51,29 @@ export function useContract() {
         method: "eth_requestAccounts",
       });
 
-      // Switch to Ganache network
+      // Try to switch to Ganache network (ignore errors if already pending)
       try {
         await window.ethereum.request({
           method: "wallet_switchEthereumChain",
           params: [{ chainId: GANACHE_CHAIN_ID }],
         });
       } catch (switchError) {
-        // Network doesn't exist, add it
         if (switchError.code === 4902) {
-          await window.ethereum.request({
-            method: "wallet_addEthereumChain",
-            params: [{
-              chainId: GANACHE_CHAIN_ID,
-              chainName: "Ganache Local",
-              rpcUrls: ["http://127.0.0.1:7545"],
-              nativeCurrency: { name: "ETH", symbol: "ETH", decimals: 18 },
-            }],
-          });
+          try {
+            await window.ethereum.request({
+              method: "wallet_addEthereumChain",
+              params: [{
+                chainId: GANACHE_CHAIN_ID,
+                chainName: "Ganache Local",
+                rpcUrls: ["http://127.0.0.1:7545"],
+                nativeCurrency: { name: "ETH", symbol: "ETH", decimals: 18 },
+              }],
+            });
+          } catch (addError) {
+            console.log("Network add pending or rejected:", addError.message);
+          }
+        } else {
+          console.log("Network switch issue:", switchError.message);
         }
       }
 
