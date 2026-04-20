@@ -105,7 +105,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -124,7 +125,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -158,7 +160,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -239,7 +242,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -280,7 +284,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -293,7 +298,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -306,7 +312,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     }
   ],
   "metadata": "{\"compiler\":{\"version\":\"0.8.19+commit.7dd6d404\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"oldAdmin\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newAdmin\",\"type\":\"address\"}],\"name\":\"AdminTransferred\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"issuer\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"string\",\"name\":\"orgName\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"string\",\"name\":\"orgType\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"}],\"name\":\"IssuerAdded\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"issuer\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"}],\"name\":\"IssuerReinstated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"issuer\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"}],\"name\":\"IssuerRevoked\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_issuerAddr\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"_orgName\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"_orgType\",\"type\":\"string\"}],\"name\":\"addIssuer\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"admin\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getAllIssuers\",\"outputs\":[{\"internalType\":\"address[]\",\"name\":\"\",\"type\":\"address[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_issuerAddr\",\"type\":\"address\"}],\"name\":\"getIssuer\",\"outputs\":[{\"components\":[{\"internalType\":\"string\",\"name\":\"orgName\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"orgType\",\"type\":\"string\"},{\"internalType\":\"bool\",\"name\":\"isActive\",\"type\":\"bool\"},{\"internalType\":\"uint256\",\"name\":\"registeredAt\",\"type\":\"uint256\"}],\"internalType\":\"struct IssuerRegistry.Issuer\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getTotalIssuers\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_issuerAddr\",\"type\":\"address\"}],\"name\":\"isActiveIssuer\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"issuerAddresses\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"issuers\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"orgName\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"orgType\",\"type\":\"string\"},{\"internalType\":\"bool\",\"name\":\"isActive\",\"type\":\"bool\"},{\"internalType\":\"uint256\",\"name\":\"registeredAt\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_issuerAddr\",\"type\":\"address\"}],\"name\":\"reinstateIssuer\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_issuerAddr\",\"type\":\"address\"}],\"name\":\"revokeIssuer\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_newAdmin\",\"type\":\"address\"}],\"name\":\"transferAdmin\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"details\":\"Only the admin can add/remove issuers. Issuers are organizations      like a DMV, University, or Hospital that can issue verifiable      credentials to identity holders.\",\"kind\":\"dev\",\"methods\":{\"addIssuer(address,string,string)\":{\"params\":{\"_issuerAddr\":\"Address of the issuer (their wallet)\",\"_orgName\":\"Name of the organization\",\"_orgType\":\"Type of organization\"}}},\"title\":\"IssuerRegistry\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"addIssuer(address,string,string)\":{\"notice\":\"Add a trusted issuer organization.\"},\"reinstateIssuer(address)\":{\"notice\":\"Reinstate a revoked issuer.\"},\"revokeIssuer(address)\":{\"notice\":\"Revoke an issuer's privileges.\"},\"transferAdmin(address)\":{\"notice\":\"Transfer admin role.\"}},\"notice\":\"Manages trusted credential issuers (organizations).\",\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/IssuerRegistry.sol\":\"IssuerRegistry\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/IssuerRegistry.sol\":{\"keccak256\":\"0x4646d059cb1f21af8a2764c7dd61c6b5267b1e0c990fc528a177450812f32f2b\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://1c934cee8e8eed284b4660abbb0bde9d546f737e92456e9030e3e4f66b0f5dc8\",\"dweb:/ipfs/QmfXRC8mpdvKzcZkXWDwuNvqRw6LEg8xs3EAxFhX2zGyPE\"]}},\"version\":1}",
@@ -11990,9 +11997,17 @@
     "name": "solc",
     "version": "0.8.19+commit.7dd6d404.Emscripten.clang"
   },
-  "networks": {},
+  "networks": {
+    "5777": {
+      "events": {},
+      "links": {},
+      "address": "0xEa60ae2604982e96B2bF448cD4c2A382FF6650B6",
+      "transactionHash": "0xf68498ba977eafb3f28561360ce80dd97611858c9f8a10715cb6f4cf59042df3"
+    }
+  },
   "schemaVersion": "3.4.16",
-  "updatedAt": "2026-04-20T20:52:36.798Z",
+  "updatedAt": "2026-04-20T21:03:11.566Z",
+  "networkType": "ethereum",
   "devdoc": {
     "details": "Only the admin can add/remove issuers. Issuers are organizations      like a DMV, University, or Hospital that can issue verifiable      credentials to identity holders.",
     "kind": "dev",
