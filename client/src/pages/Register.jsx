@@ -16,6 +16,14 @@ export default function Register({ contracts, account, isConnected }) {
 
     setLoading(true)
     try {
+      // Check if already registered
+      const alreadyRegistered = await contracts.did.isRegistered(account)
+      if (alreadyRegistered) {
+        toast.error('This wallet is already registered! Switch to a different account in MetaMask.', { id: 'reg' })
+        setLoading(false)
+        return
+      }
+
       // Generate public key hash from the account address
       const publicKeyHash = ethers.keccak256(ethers.toUtf8Bytes(account + Date.now()))
 
@@ -40,7 +48,12 @@ export default function Register({ contracts, account, isConnected }) {
       toast.success('Identity registered on blockchain!', { id: 'reg' })
     } catch (err) {
       console.error(err)
-      toast.error(err.reason || err.message || 'Registration failed', { id: 'reg' })
+      const msg = err.reason || err.message || 'Registration failed'
+      if (msg.includes('already registered') || msg.includes('revert')) {
+        toast.error('This wallet already has a DID! Switch accounts in MetaMask.', { id: 'reg' })
+      } else {
+        toast.error(msg, { id: 'reg' })
+      }
     }
     setLoading(false)
   }

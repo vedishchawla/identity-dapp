@@ -1,12 +1,31 @@
+# Dependencies
 node_modules/
+client/node_modules/
+
+# Build
+build/
 .next/
 out/
 dist/
 cache/
+
+# Truffle
 artifacts/
 typechain-types/
 coverage/
 coverage.json
+
+# Environment
 *.env
 .env.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Misc
 deployedAddress.json
